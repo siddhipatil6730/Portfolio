@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 56px;
+            text-align: center;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            color: white;
+        }
+
+        .navbar {
+            background-color: #6a1b9a;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin: 20px auto;
+            display: block;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            max-width: 600px;
+        }
+
+        .btn-primary {
+            background-color: #9c27b0;
+            border-color: #9c27b0;
+        }
+
+        .btn-primary:hover {
+            background-color: #6a1b9a;
+            border-color: #6a1b9a;
+        }
+
+        .info-section {
+            text-align: left;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">My Profile</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <img id="userProfileImg" src="https://via.placeholder.com/200" alt="Profile Image" class="profile-img">
+        <h2 id="userName">[Your Name]</h2>
+        <h4 id="userProfession">[Your Profession]</h4>
+
+        <div class="info-section">
+            <strong>Email:</strong> <span id="userEmail">[Your Email]</span>
+        </div>
+        <div class="info-section">
+            <strong>Contact:</strong> <span id="userContact">[Your Contact]</span>
+        </div>
+        <div class="info-section">
+            <strong>Address:</strong> <span id="userAddress">[Your Address]</span>
+        </div>
+        <div class="info-section">
+            <strong>Skills:</strong> <span id="userSkills">[Your Skills]</span>
+        </div>
+        <div class="info-section">
+            <strong>Bio:</strong> <p id="userBio">[Short Bio]</p>
+        </div>
+
+        <button class="btn btn-primary" onclick="updateUserInfo()">Update Profile</button>
+    </div>
+
+    <script>
+        function collectUserInfo() {
+            let name = prompt("Enter your full name:");
+            while (!name) {
+                name = prompt("Name cannot be empty! Enter your full name:");
+            }
+
+            let profession = prompt("Enter your profession:");
+            while (!profession) {
+                profession = prompt("Profession cannot be empty! Enter your profession:");
+            }
+
+            let email = prompt("Enter your email:");
+            while (!email || !validateEmail(email)) {
+                email = prompt("Invalid email! Enter a valid email:");
+            }
+
+            let contact = prompt("Enter your contact number:");
+            while (!contact || isNaN(contact)) {
+                contact = prompt("Invalid number! Enter a valid contact number:");
+            }
+
+            let address = prompt("Enter your address:");
+            while (!address) {
+                address = prompt("Address cannot be empty! Enter your address:");
+            }
+
+            let skills = prompt("Enter your skills (comma-separated):");
+            while (!skills) {
+                skills = prompt("Skills cannot be empty! Enter your skills:");
+            }
+
+            let bio = prompt("Enter a short bio about yourself:");
+            while (!bio) {
+                bio = prompt("Bio cannot be empty! Enter a short bio:");
+            }
+
+            let profileImg = prompt("Enter the URL of your profile picture:");
+            if (!profileImg) {
+                profileImg = "https://via.placeholder.com/200"; // Default Image
+            }
+
+            // Display collected information in an alert
+            alert(`Profile Updated Successfully!\n\nName: ${name}\nProfession: ${profession}\nEmail: ${email}\nContact: ${contact}\nAddress: ${address}\nSkills: ${skills}\nBio: ${bio}`);
+
+            // Log information to the console
+            console.log("User Information Collected:");
+            console.log("Name:", name);
+            console.log("Profession:", profession);
+            console.log("Email:", email);
+            console.log("Contact:", contact);
+            console.log("Address:", address);
+            console.log("Skills:", skills);
+            console.log("Bio:", bio);
+            console.log("Profile Picture URL:", profileImg);
+
+            // Update the HTML page with user info
+            document.getElementById("userName").innerText = name;
+            document.getElementById("userProfession").innerText = profession;
+            document.getElementById("userEmail").innerText = email;
+            document.getElementById("userContact").innerText = contact;
+            document.getElementById("userAddress").innerText = address;
+            document.getElementById("userSkills").innerText = skills;
+            document.getElementById("userBio").innerText = bio;
+            document.getElementById("userProfileImg").src = profileImg;
+        }
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function updateUserInfo() {
+            collectUserInfo();
+        }
+
+        // Collect user information when the page loads
+        window.onload = collectUserInfo;
+    </script>
+
+</body>
+</html>
